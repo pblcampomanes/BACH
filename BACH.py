@@ -1047,87 +1047,7 @@ class SimulationData:
             raise
 
 
-
-
-# #Cost function for optimization.
-
-# e_w_ct2_val = []
-# s_w_ct2_val = []
-# e_w_cm_val = []
-# s_w_cm_val = []
-# it_list = []
-
-
-
-
-
-# class LBFGSB_Optimizer:
-
-# """
-#     This code defines a class LBFGSB_Optimizer that uses the L-BFGS-B algorithm to minimize a user-defined cost function subject to bounds on the variables. 
-#     The class takes the following inputs:
-
-#     cost_function: the user-defined cost function to be minimized
-#     bounds: a list of tuples specifying the lower and upper bounds for each variable
-#     ftol: the tolerance for the optimization algorithm to terminate
-#     maxiter: the maximum number of iterations for the optimization algorithm to perform
-#     epsilon: a vector specifying the step size used to approximate the gradient of the cost function at each point. 
-#             If not specified, the default value is 0.01 for each variable.
-
-#     The class has two methods:
-
-#     der_cost_LBFGSB: a method that calculates the gradient of the cost function using the approx_fprime function from the optimize module in scipy
-#     optimize: a method that performs the optimization using the L-BFGS-B algorithm and returns the optimized variables.
-
-#     The code also includes an example usage of the class to minimize a simple quadratic cost function with two variables. An example code is provided below.
-
-#     def my_cost_function(x):
-# 	    return (x[0] - 4.15)**2 + (x[1] - 4.4)**2
-
-# 	bounds = [(4.0, 4.5), (4.0, 4.5)]
-# 	optimizer = LBFGSB_Optimizer(cost_function=my_cost_function, bounds=bounds, epsilon=[0.01, 0.01])
-# 	x0 = [4.1, 4.3]
-# 	optimized_x = optimizer.optimize(x0)
-# """
-
-# def __init__(self, function, bounds, ftol=5e-5, maxiter=1000, epsilon=None):
-    
-#     self.function = function
-#     self.bounds = bounds
-#     self.ftol = ftol
-#     self.maxiter = maxiter
-    
-#     if epsilon is None:
-        
-#         self.epsilon = np.ones(len(bounds)) * 0.01
-    
-#     else:
-        
-#         self.epsilon = epsilon
-
-# def der_cost_LBFGSB(self, x):
-    
-#     der = optimize.approx_fprime(x, self.cost_function, self.epsilon)
-    
-#     return der
-
-# def optimize(self, x0):
-    
-#     x0 = np.array(x0)
-#     result = optimize.minimize(self.cost_function, x0, bounds=self.bounds, method='L-BFGS-B', jac=self.der_cost_LBFGSB, options={'ftol': self.ftol, 'maxiter': self.maxiter, 'disp': True})
-    
-#     if not result.success:
-    
-#         raise ValueError('Optimization failed. {}'.format(result.message))
-    
-#     return result.x
-    
-
-
-
-
 #Functions to write the output data files.
-
 
 def data_file_writer_iterations(iteration_output_file : str,
                      cost : float,
@@ -1536,21 +1456,6 @@ def run_simulations_over_properties(iniguess,
         elif opt_type=="it":
             
             cost_tot = cost_function(input_data=input_data,interfacialtension=sim_it_over_temp_mol,kind=cost_kind)
-          
-        
-#         if opt_type in ['reg','sdk']:
-            
-#             density_list.extend(sim_density_over_temp_mol)
-#             surfacetension_list.extend(sim_st_over_temp_mol)
-        
-#             if opt_type=='reg':
-                
-#                 ev_list.extend(sim_ev_over_temp_mol)
-        
-#         elif opt_type=='it':
-            
-            
-#             it_list.extend(sim_st_over_temp_mol)
             
         return cost_tot
     
